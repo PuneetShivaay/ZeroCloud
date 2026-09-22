@@ -13,6 +13,7 @@ import {
   Sparkles,
   Play
 } from 'lucide-react';
+import DownloadDesktop from './components/DownloadDesktop';
 
 export default function App() {
   // System Specs
@@ -254,6 +255,8 @@ export default function App() {
             </div>
           </div>
         </header>
+
+        <DownloadDesktop />
 
         {/* Hardware Specs */}
         <section className="grid grid-cols-1 md:grid-cols-3 gap-4">
