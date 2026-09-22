@@ -15,6 +15,7 @@ Living documentation for the ZeroCloud desktop local-compute application.
 | [`04-ipc-contract.md`](./04-ipc-contract.md) | Renderer ↔ Main ↔ Python message contract |
 | [`05-roadmap.md`](./05-roadmap.md) | Phases, scope, current status |
 | [`06-distribution.md`](./06-distribution.md) | Web demo vs desktop app, packaging |
+| [`07-requirements-discovery.md`](./07-requirements-discovery.md) | **Open questions blocking production design** |
 | [`decisions/`](./decisions/) | Architecture Decision Records (ADRs) |
 | [`known-issues.md`](./known-issues.md) | Environment problems and fixes |
 | [`discussion-log.md`](./discussion-log.md) | Chronological discussion history |
