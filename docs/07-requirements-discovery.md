@@ -4,9 +4,151 @@
 **Purpose:** Everything that must be decided before ZeroCloud can be
 designed to production standard and released.
 
-> **How to use this:** answer inline under each question. Anything left
-> blank is an open risk. Questions marked 🔴 **block architecture** — they
-> must be answered before serious build work continues.
+> **How to use this:** fill in the **ANSWERS** section below. You do not
+> need to answer everything — start with the 12 blocking questions.
+> The reference tables further down explain *why* each question matters.
+> Anything left blank is an open risk. 🔴 = blocks architecture.
+
+---
+
+# ✍️ ANSWERS — start here
+
+> Replace each `...` with your answer. Leave blank if unknown — that's
+> useful information too. Add `(guess)` if you're unsure.
+
+## The 12 blocking questions
+
+### 1. What do users actually do with ZeroCloud? *(§1.1)*
+One sentence, in a user's own words.
+
+```
+...
+```
+
+---
+
+### 2. List the tasks/scripts *(§2.1)*
+What will users be able to run? Rough list is fine.
+
+```
+1. ...
+2. ...
+3. ...
+```
+
+---
+
+### 3. Inference, training, or data processing? *(§2.2)*
+
+```
+...
+```
+
+---
+
+### 4. How long does a typical job take? *(§2.3)*
+Seconds / minutes / hours?
+
+```
+...
+```
+
+---
+
+### 5. 🔴 Will users ever supply their own scripts? *(§2.9)*
+**Yes / No.** If yes, we need sandboxing and the security model changes significantly.
+
+```
+...
+```
+
+---
+
+### 6. Input file sizes? *(§3.2)*
+Typical and maximum. MB or GB?
+
+```
+typical: ...
+maximum: ...
+formats: ...
+```
+
+---
+
+### 7. Which OS and GPUs must be supported? *(§4.2, §4.4)*
+
+```
+OS:   [ ] Windows   [ ] macOS   [ ] Linux
+GPU:  [ ] NVIDIA    [ ] AMD     [ ] Apple   [ ] Intel   [ ] CPU-only OK
+```
+
+---
+
+### 8. Confirm the architecture: website UI + local helper? *(§5.1)*
+Yes / No / Something else.
+
+```
+...
+```
+
+---
+
+### 9. Helper in Python (FastAPI) or Electron (Node)? *(§5.2)*
+Python = same language as the compute. Electron = reuses existing code.
+
+```
+...
+```
+
+---
+
+### 10. Acceptable first-run download size? *(§6.1)*
+CUDA PyTorch is ~2.4 GB. CPU-only is ~200 MB.
+
+```
+...
+```
+
+---
+
+### 11. Code-signing budget? *(§9.1)*
+~$200–500/yr Windows, $99/yr Apple. Launch blocker if unfunded.
+
+```
+...
+```
+
+---
+
+### 12. Launch date and team size? *(§11.1, §11.2)*
+
+```
+target date: ...
+hard or soft: ...
+team: ...
+who does Python: ...
+who does frontend: ...
+```
+
+---
+
+## Additional answers
+
+> Anything else you want to record. Reference the section number,
+> e.g. `§3.7 — data is not regulated`.
+
+```
+...
+```
+
+---
+---
+
+# 📖 Reference — full question list
+
+The tables below explain why each question matters. Answer them in the
+section above, or inline here if you prefer.
+
 
 ---
 
@@ -171,7 +313,8 @@ designed to production standard and released.
 
 ## Minimum set to unblock design
 
-If you answer nothing else, answer these **twelve**:
+These are the 12 questions reproduced in the **ANSWERS** section at the
+top of this file. Answer them there.
 
 1. What do users actually do with ZeroCloud? (1.1)
 2. List the tasks/scripts. (2.1)
