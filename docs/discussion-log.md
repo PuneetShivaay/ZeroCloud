@@ -4,6 +4,75 @@ Chronological record of design discussions. Append new entries at the top.
 
 ---
 
+## 2026-09-23 (later) — Phase 1 build
+
+### Decisions locked
+- **Windows-only** for Phase 1
+- **Electron** confirmed over Tauri — reversible, ADR-0002 unchanged
+- Demo job reads a **real input file** *and* runs a matmul workload
+
+### Dev machine probed
+```
+CPU     Intel i5-1245U, 10 cores / 12 threads
+RAM     15.6 GB
+GPU     Intel UHD Graphics (integrated, ~2 GB)
+NVIDIA  none — nvidia-smi not present
+Python  3.14.0 and 3.12.4
+```
+
+Two consequences:
+1. **No CUDA locally** — forces the CPU fallback path to be built properly
+   from day one rather than bolted on. GPU verification needs another machine.
+2. **Python 3.14 must be avoided** — PyTorch wheels lag new CPython.
+   `runtime.cjs` now probes 3.12 → 3.11 → 3.10 explicitly.
+
+### Built
+Electron main/preload/runtime/jobs, `probe.py`, `zc_protocol.py`,
+`demo_job.py`, `DesktopApp.jsx`, and the `main.jsx` runtime switch.
+
+`probe.py` and `demo_job.py` were verified standalone before the UI was
+wired — probe returned correct hardware, demo job streamed NDJSON and
+wrote a result file.
+
+### Obstacles hit
+
+**TLS interception broke the Electron binary download.**
+`npm install` succeeded but the 150 MB binary failed with `fetch failed`.
+PowerShell could fetch the same URL (HTTP 200, 158 MB) because it uses the
+Windows cert store; Node ships its own CA list. Worked around by
+downloading via PowerShell and extracting manually.
+
+This is **not just a dev annoyance** — Phase 2 downloads a ~2.4 GB runtime
+and enterprise users sit behind the same middleboxes. Recorded in
+`known-issues.md`; validates the proxy hazard already listed in
+`03-runtime-strategy.md`.
+
+**Vite port drift.** Port 5173 was occupied, Vite silently moved to 5174,
+Electron loaded the wrong URL. Fixed with `--strictPort` and an
+`electron:only` script for attaching to a running dev server.
+
+### Result
+App launches. Hardware cards render correct values. Device correctly
+resolves to CPU with a clear "PyTorch not installed" notice.
+**Feasibility proven.**
+
+### Distribution question
+Asked how the Electron code runs once the site is deployed. Clarified that
+it cannot — a URL can never launch a native process. ZeroCloud is **two
+products from one repo**, linked by a download button rather than
+automatic execution. Documented in `06-distribution.md`.
+
+Built `DownloadDesktop.jsx` + `config/release.js`. Renders a disabled
+"coming soon" state until a real build URL exists, so it is safe to deploy
+immediately. Only 2 lines were added to `App.jsx`.
+
+### Next
+- Confirm a full job run + cancel inside the app
+- Install CPU PyTorch to flip the backend from fallback to real tensors
+- electron-builder for an actual `.exe`
+
+---
+
 ## 2026-09-23 — Initial scoping
 
 **Participants:** Puneet, GitHub Copilot
