@@ -101,8 +101,7 @@ CUDA DLLs, huge binaries, slow startup).
 |---|---|
 | Disk full / no write permission | Preflight check **before** downloading |
 | Dropped connection mid-download | HTTP range requests, resumable, checksummed |
-| Corporate proxy / TLS inspection | Honor `HTTP_PROXY`/`HTTPS_PROXY`, custom CA support |
-| Antivirus / SmartScreen flags | Code-sign the app; document known false positives |
+| Corporate proxy / TLS inspection | Honor `HTTP_PROXY`/`HTTPS_PROXY`, custom CA support || Antivirus / SmartScreen flags | Code-sign the app; document known false positives |
 | Air-gapped machines | Optional offline "full" installer, same codepath |
 | Corrupted runtime | "Repair runtime" action — verify manifest, re-fetch |
 | Old NVIDIA driver | Detect and show exact required version + link |

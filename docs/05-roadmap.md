@@ -17,12 +17,12 @@
 | # | Task | Status |
 |---|---|---|
 | 1.1 | Create `docs/` and record decisions | ✅ Done |
-| 1.2 | Electron main process + secure preload | ⬜ Not started |
-| 1.3 | `python/probe.py` — hardware detection | ⬜ Not started |
-| 1.4 | `python/jobs/demo_job.py` — NDJSON emitter | ⬜ Not started |
-| 1.5 | `DesktopApp.jsx` — pick file, run, live logs | ⬜ Not started |
-| 1.6 | Wire `package.json` + Vite for Electron | ⬜ Not started |
-| 1.7 | Verify end-to-end on a real machine | ⬜ Not started |
+| 1.2 | Electron main process + secure preload | ✅ Done |
+| 1.3 | `python/probe.py` — hardware detection | ✅ Done |
+| 1.4 | `python/jobs/demo_job.py` — NDJSON emitter | ✅ Done |
+| 1.5 | `DesktopApp.jsx` — pick file, run, live logs | ✅ Done |
+| 1.6 | Wire `package.json` + Vite for Electron | ✅ Done |
+| 1.7 | Verify end-to-end on a real machine | 🟡 App launches, probe verified; job run pending |
 
 **Simplifying assumption:** developer has Python installed. No runtime
 installer yet.
