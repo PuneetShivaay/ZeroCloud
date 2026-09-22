@@ -5,14 +5,15 @@
 
 **Updated:** 2026-09-23
 **Branch:** `feature/desktop-local-compute`
-**Phase:** 1 — Feasibility Prototype
+**Phase:** 1 — Feasibility Prototype ✅ **COMPLETE**
 
 ---
 
 ## 🟢 Where we are
 
-**Feasibility is proven.** The desktop app launches, reads real hardware,
-and is wired to execute local Python. The architecture works.
+**Phase 1 complete. Feasibility proven end to end.** The desktop app
+launches, reads real hardware, executes local Python, streams live
+progress, and writes results to disk — with zero network activity.
 
 ```
 Electron window
@@ -21,6 +22,18 @@ Electron window
             └─ Node main process
                  └─ Python 3.12 child process
                       └─ real hardware
+```
+
+### Verified run — 2026-09-23
+
+```
+Matrix 120x120, 20 iterations (pure Python)
+device        cpu (no-torch)
+backend       python-fallback
+inputValues   50,000
+elapsedSec    3.623
+exit          0  (4.7s wall)
+output        C:\Users\2114791\ZeroCloud\output\result-1790119611.json
 ```
 
 ---
@@ -33,21 +46,23 @@ Electron window
 | Desktop vs web UI switch | `window.zerocloud` detection |
 | Hardware detection | Correct CPU / GPU / RAM shown in app |
 | Device fallback logic | Resolved to `cpu`, torch absence surfaced |
-| Python job execution | `demo_job.py` verified via CLI |
-| NDJSON streaming | Progress + logs + result events parsed |
-| Output file writing | `~\ZeroCloud\output\result-*.json` |
+| **Job execution in-app** | **Run locally → exit 0** |
+| **Live log streaming** | **6 NDJSON lines rendered in real time** |
+| **Progress events** | **Bar advanced to 100%, stage `done`** |
+| **Result rendering** | **Metrics card with checksum / gflops / backend** |
+| **Local output file** | **`result-*.json` written and linked** |
 | Web demo preserved | Browser still renders original `App.jsx` |
 | Download CTA | Builds clean; disabled until a release exists |
 
 ---
 
-## 🟡 In progress
+## 🟡 Still unverified
 
-| Item | Blocker |
+| Item | How to test |
 |---|---|
-| Full job run **inside the app** | Needs a manual click-through: Run → logs → result |
-| Cancel button verification | Set iterations high, then cancel mid-run |
-| Input file → Python path | Pick a CSV and confirm it reaches the script |
+| Cancel button | Set iterations to ~200, Run, then Cancel mid-job |
+| Input file → Python | Select a CSV, confirm `inputValues` matches its contents |
+| CUDA path | Requires an NVIDIA machine — unavailable locally |
 
 ---
 

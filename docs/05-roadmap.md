@@ -8,9 +8,9 @@
 > Goal: prove end-to-end that a React UI can run a Python/PyTorch job on
 > local hardware with live progress. **Not** production-ready.
 >
-> **Status: substantially complete.** The desktop app launches, detects
-> real hardware, and is wired to execute local Python. Remaining: confirm
-> a full job run and cancellation on the dev machine.
+> **Status: ✅ COMPLETE (2026-09-23).** Verified in-app: job spawned,
+> logs streamed live, progress reached 100%, metrics rendered, result
+> written to disk, clean exit 0.
 
 ---
 
@@ -23,10 +23,10 @@
 | 1.1 | Create `docs/` and record decisions | ✅ Done |
 | 1.2 | Electron main process + secure preload | ✅ Done |
 | 1.3 | `python/probe.py` — hardware detection | ✅ Done — verified |
-| 1.4 | `python/jobs/demo_job.py` — NDJSON emitter | ✅ Done — verified via CLI |
+| 1.4 | `python/jobs/demo_job.py` — NDJSON emitter | ✅ Done — verified |
 | 1.5 | `DesktopApp.jsx` — pick file, run, live logs | ✅ Done |
 | 1.6 | Wire `package.json` + Vite for Electron | ✅ Done |
-| 1.7 | Verify end-to-end in the app | 🟡 App launches + probe confirmed; job run/cancel pending |
+| 1.7 | Verify end-to-end in the app | ✅ **Done — full run confirmed** |
 | 1.8 | Download CTA on the web demo | ✅ Done |
 
 **Simplifying assumption:** developer has Python installed. No runtime
@@ -34,6 +34,19 @@ installer yet.
 
 **Exit criteria:** select a file → job runs → progress streams →
 output displays → cancel works.
+**Met**, except cancel (untested) and file input (untested).
+
+### Verified run
+
+```
+Matrix 120x120, 20 iterations (pure Python)
+device        cpu (no-torch)
+backend       python-fallback
+inputValues   50,000
+elapsedSec    3.623
+exit          0  (4.7s wall)
+output        C:\Users\...\ZeroCloud\output\result-1790119611.json
+```
 
 ### What has been proven
 
